@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kuber-job
+spec:
+  backoffLimit: 4
+  template:
+    spec:
+      containers:
+      - name: job-with-failure
+        image: busybox
+        command: ["/bin/sh", "-c"]
+        args: ["echo 'Running Job'; sleep 4; exit 1"]
+      restartPolicy: OnFailure
